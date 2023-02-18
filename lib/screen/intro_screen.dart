@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'sign_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({ super.key });
@@ -22,7 +24,9 @@ class IntroScreen extends StatelessWidget {
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Get.to(SignScreen(initialIndex: 0))
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                 ),
@@ -33,7 +37,9 @@ class IntroScreen extends StatelessWidget {
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Get.to(SignScreen(initialIndex: 1))
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade800,
                 ),
