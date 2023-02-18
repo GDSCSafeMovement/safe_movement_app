@@ -15,7 +15,7 @@ class IntroScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Text('Save Movement', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  Text('Safe Movement', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   Text('더욱 안전한 이동을 위하여', style: TextStyle(fontSize: 14)),
                 ],
               ),
