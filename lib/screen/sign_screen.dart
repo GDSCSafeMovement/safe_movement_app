@@ -48,7 +48,7 @@ class _SignInWidget extends StatefulWidget {
 }
 
 class _SignInWidgetState extends State<_SignInWidget> {
-  final _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,11 @@ class _SignInWidgetState extends State<_SignInWidget> {
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
               child: ElevatedButton(
-                onPressed: () {},    // TODO: Sign In 기능
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                  }
+                },    // TODO: Sign In 기능
                 child: const Text('Sign In'),
               ),
             ),
@@ -119,11 +123,12 @@ class _SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<_SignUpWidget> {
-  final _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Container(
         margin: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -200,7 +205,11 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},    // Sign Up 기능
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                    }
+                  },    // TODO: Sign Up 기능
                   child: const Text("Sign Up"),
                 ),
               ),
