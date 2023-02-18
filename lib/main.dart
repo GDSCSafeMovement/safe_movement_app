@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'screen/intro_screen.dart';
 
 void main() {
   runApp(const SafeMovementApp());
@@ -9,17 +11,8 @@ class SafeMovementApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            "Safe Movement",
-            style: TextStyle(
-              fontSize: 30,
-            ),
-          ),
-        ),
-      ),
+    return const GetMaterialApp(
+      home: IntroScreen(),
     );
   }
 }
