@@ -67,10 +67,10 @@ class _SignInWidgetState extends State<_SignInWidget> {
               ),
             ),
             TextFormField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                labelText: "Username",
-                suffixIcon: Icon(Icons.person),
+                labelText: "Email",
+                suffixIcon: Icon(Icons.email),
               ),
               validator: (value) {
                 return value!.isEmpty ? "내용을 입력해 주세요!" : null;
@@ -137,17 +137,17 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
             children: [
               const SizedBox(height: 10),
               const Text(
-                'Username',
+                'Email Address',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               TextFormField(
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: "Username",
-                  suffixIcon: Icon(Icons.person),
+                  labelText: "EmailAdress",
+                  suffixIcon: Icon(Icons.email),
                 ),
                 validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
               ),
@@ -186,10 +186,10 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                 ),
               ),
               TextFormField(
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
-                  labelText: "E-Mail",
-                  suffixIcon: Icon(Icons.email),
+                  labelText: "Username",
+                  suffixIcon: Icon(Icons.person),
                 ),
                 validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
               ),
