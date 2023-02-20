@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import './find_user.dart';
 class SignScreen extends StatefulWidget {
   const SignScreen({
     super.key,
@@ -100,7 +102,9 @@ class _SignInWidgetState extends State<_SignInWidget> {
               ),
             ),
             InkWell(
-              onTap: () {},  // TODO: Username, Password 찾기 기능
+              onTap: () {
+                Get.to(FindUserScreen());
+              },
               child: const Text(
                 '도움이 필요하신가요?',
                 style: TextStyle(
