@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import './find_user.dart';
+
 class SignScreen extends StatefulWidget {
   const SignScreen({
     super.key,
@@ -51,6 +53,22 @@ class _SignInWidget extends StatefulWidget {
 
 class _SignInWidgetState extends State<_SignInWidget> {
   final _formKey = GlobalKey<FormState>();
+  String _userEmail = "";
+  String _userPassword = "";
+
+  Future<bool> firebaseSignIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _userEmail,
+        password: _userPassword,
+      );
+
+      return true;
+
+    } on FirebaseAuthException catch (_) {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +95,9 @@ class _SignInWidgetState extends State<_SignInWidget> {
               validator: (value) {
                 return value!.isEmpty ? "내용을 입력해 주세요!" : null;
               },
+              onSaved: (value) {
+                _userEmail = value!;
+              },
             ),
             TextFormField(
               keyboardType: TextInputType.text,
@@ -88,14 +109,41 @@ class _SignInWidgetState extends State<_SignInWidget> {
               validator: (value) {
                 return value!.isEmpty ? "내용을 입력해 주세요!" : null;
               },
+              onSaved: (value) {
+                _userPassword = value!;
+              },
             ),
             Container(
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  // Field Validation
                   if (_formKey.currentState!.validate()) {
+                    // Save Field Value
                     _formKey.currentState!.save();
+                   
+                    // Sign In
+                    if (await firebaseSignIn()) {
+                      // Success
+                      Get.defaultDialog(
+                        title: "DEBUG",
+                        content: Text("Login Success"),
+                      );
+
+                    } else {
+                      // Failure
+                      Get.defaultDialog(
+                        title: "Error",
+                        content: Container(
+                          margin: EdgeInsets.all(10),
+                          child: Text(
+                            "Username 혹은 Password가\n잘못되었습니다!",
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      );
+                    }
                   }
                 },    // TODO: Sign In 기능
                 child: const Text('Sign In'),
