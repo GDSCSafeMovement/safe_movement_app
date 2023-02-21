@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import './find_user.dart';
 import '../utility/form_validator.dart';
@@ -23,29 +24,50 @@ class _ScreenScreenState extends State<SignScreen> {
       child: DefaultTabController(
         initialIndex: widget.initialIndex,
         length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: 'Sign In'),
-                Tab(text: 'Sign Up'),
+        child: Builder(builder: (BuildContext context) {
+          final tabController = DefaultTabController.of(context);
+
+          return Scaffold(
+            appBar: AppBar(
+              bottom: const TabBar(
+                tabs: [
+                  Tab(text: 'Sign In'),
+                  Tab(text: 'Sign Up'),
+                ],
+              ),
+            ),
+            body: TabBarView(
+              children: [
+                _SignInWidget(
+                  onSignIn: () {},
+                ),
+                _SignUpWidget(
+                  onSignUp: () {
+                    // Show dialog
+                    Get.defaultDialog(
+                      title: "Sign Up",
+                      content: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: const Text("회원가입 성공!"),
+                      ),
+                    );
+                    // Move to sign-in tab
+                    tabController.animateTo(0);
+                  },
+                ),
               ],
             ),
-          ),
-          body: const TabBarView(
-            children: [
-              _SignInWidget(),   // Sign In
-              _SignUpWidget(),   // Sign Up
-            ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
 }
 
 class _SignInWidget extends StatefulWidget {
-  const _SignInWidget();
+  const _SignInWidget({ this.onSignIn });
+
+  final void Function()? onSignIn;
 
   @override
   State<_SignInWidget> createState() => _SignInWidgetState();
@@ -122,11 +144,9 @@ class _SignInWidgetState extends State<_SignInWidget> {
                     // Sign In
                     if (await firebaseSignIn()) {
                       // Success
-                      // TODO: Move to home screen
-                      Get.defaultDialog(
-                        title: "DEBUG",
-                        content: Text("Login Success"),
-                      );
+                      if (widget.onSignIn != null) {
+                        widget.onSignIn!();
+                      }
 
                     } else {
                       // Failure
@@ -165,7 +185,9 @@ class _SignInWidgetState extends State<_SignInWidget> {
 }
 
 class _SignUpWidget extends StatefulWidget {
-  const _SignUpWidget();
+  const _SignUpWidget({ this.onSignUp });
+
+  final void Function()? onSignUp;
 
   @override
   State<_SignUpWidget> createState() => _SignUpWidgetState();
@@ -173,6 +195,39 @@ class _SignUpWidget extends StatefulWidget {
 
 class _SignUpWidgetState extends State<_SignUpWidget> {
   final _formKey = GlobalKey<FormState>();
+  String _userEmail = "";
+  String _userPassword = "";
+  String _userPasswordCheck = "";
+  String _userName = "";
+  String _userPhoneNumber = "";
+
+  Future<bool> firebaseSignUp() async {
+    // Check password check field
+    if (_userPassword != _userPasswordCheck) {
+      // Failure
+      return false;
+    }
+
+    // Create new user with firebase authentication
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _userEmail,
+      password: _userPassword,
+    );
+
+    // Update user information on firestore
+    FirebaseFirestore
+      .instance
+      .collection("users")
+      .doc(_userEmail)
+      .set(<String, String>{
+        "username": _userName,
+        "phone": _userPhoneNumber,
+      })
+      .onError((error, _) {});
+
+    // Success
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -199,6 +254,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   suffixIcon: Icon(Icons.email),
                 ),
                 validator: validateEmail,
+                onSaved: (value) => { _userEmail = value! },
               ),
               const SizedBox(height: 50),
               const Text(
@@ -215,7 +271,8 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "Password",
                   suffixIcon: Icon(Icons.key),
                 ),
-                validator: validatePassword, 
+                validator: validatePassword,
+                onSaved: (value) => { _userPassword = value! },
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
@@ -225,6 +282,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   suffixIcon: Icon(Icons.key),
                 ),
                 validator: validatePassword,
+                onSaved: (value) => { _userPasswordCheck = value! },
               ),
               const SizedBox(height: 50),
               const Text(
@@ -241,6 +299,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   suffixIcon: Icon(Icons.person),
                 ),
                 validator: validateNotBlank,
+                onSaved: (value) => { _userName = value! },
               ),
               TextFormField(
                 keyboardType: TextInputType.phone,
@@ -249,16 +308,32 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   suffixIcon: Icon(Icons.phone),
                 ),
                 validator: validatePhoneNumber,
+                onSaved: (value) => { _userPhoneNumber = value! },
               ),
               const SizedBox(height: 50),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
+
+                      if (await firebaseSignUp()) {
+                        if (widget.onSignUp != null) {
+                          widget.onSignUp!();
+                        }
+
+                      } else {
+                        Get.defaultDialog(
+                          title: "ERROR",
+                          content: Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text("패스워드 확인란이 일치하지 않습니다!"),
+                          ),
+                        );
+                      }
                     }
-                  },    // TODO: Sign Up 기능
+                  },
                   child: const Text("Sign Up"),
                 ),
               ),
