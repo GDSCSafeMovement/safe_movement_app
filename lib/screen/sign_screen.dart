@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-
 import './find_user.dart';
+import '../utility/form_validator.dart';
 
 class SignScreen extends StatefulWidget {
   const SignScreen({
@@ -92,9 +92,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
                 labelText: "Email",
                 suffixIcon: Icon(Icons.email),
               ),
-              validator: (value) {
-                return value!.isEmpty ? "내용을 입력해 주세요!" : null;
-              },
+              validator: validateEmail,
               onSaved: (value) {
                 _userEmail = value!;
               },
@@ -106,9 +104,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
                 labelText: "Password",
                 suffixIcon: Icon(Icons.key),
               ),
-              validator: (value) {
-                return value!.isEmpty ? "내용을 입력해 주세요!" : null;
-              },
+              validator: validatePassword,
               onSaved: (value) {
                 _userPassword = value!;
               },
@@ -126,6 +122,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
                     // Sign In
                     if (await firebaseSignIn()) {
                       // Success
+                      // TODO: Move to home screen
                       Get.defaultDialog(
                         title: "DEBUG",
                         content: Text("Login Success"),
@@ -136,8 +133,8 @@ class _SignInWidgetState extends State<_SignInWidget> {
                       Get.defaultDialog(
                         title: "Error",
                         content: Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             "Username 혹은 Password가\n잘못되었습니다!",
                             textAlign: TextAlign.center,
                           ),
@@ -145,13 +142,13 @@ class _SignInWidgetState extends State<_SignInWidget> {
                       );
                     }
                   }
-                },    // TODO: Sign In 기능
+                },
                 child: const Text('Sign In'),
               ),
             ),
             InkWell(
               onTap: () {
-                Get.to(FindUserScreen());
+                Get.to(const FindUserScreen());
               },
               child: const Text(
                 '도움이 필요하신가요?',
@@ -201,7 +198,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "EmailAdress",
                   suffixIcon: Icon(Icons.email),
                 ),
-                validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
+                validator: validateEmail,
               ),
               const SizedBox(height: 50),
               const Text(
@@ -218,7 +215,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "Password",
                   suffixIcon: Icon(Icons.key),
                 ),
-                validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
+                validator: validatePassword, 
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
@@ -227,7 +224,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "Password Check",
                   suffixIcon: Icon(Icons.key),
                 ),
-                validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
+                validator: validatePassword,
               ),
               const SizedBox(height: 50),
               const Text(
@@ -243,7 +240,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "Username",
                   suffixIcon: Icon(Icons.person),
                 ),
-                validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
+                validator: validateNotBlank,
               ),
               TextFormField(
                 keyboardType: TextInputType.phone,
@@ -251,7 +248,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                   labelText: "Phone Number",
                   suffixIcon: Icon(Icons.phone),
                 ),
-                validator: (value) { return value!.isEmpty ? "내용을 입력해 주세요!" : null; },
+                validator: validatePhoneNumber,
               ),
               const SizedBox(height: 50),
               SizedBox(
