@@ -42,3 +42,26 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+firebase_options.dart
+firebase.json
+firestore.indexes.json
+firestore.rules
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+GoogleService-Info.plist
+
+# Android
+/android
+
+#ios
+/ios
