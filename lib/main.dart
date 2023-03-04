@@ -42,8 +42,11 @@ class SafeMovementApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: IntroScreen(),
+    return GetMaterialApp(
+      home: const IntroScreen(),
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
     );
   }
 }
