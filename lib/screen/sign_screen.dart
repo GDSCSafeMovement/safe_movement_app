@@ -134,7 +134,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
             Container(
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed: () async {
                   // Field Validation
                   if (_formKey.currentState!.validate()) {
@@ -313,7 +313,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
               const SizedBox(height: 50),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: FilledButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
