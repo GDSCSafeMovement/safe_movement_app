@@ -170,10 +170,10 @@ class _SignInWidgetState extends State<_SignInWidget> {
               onTap: () {
                 Get.to(const FindUserScreen());
               },
-              child: const Text(
+              child: Text(
                 '도움이 필요하신가요?',
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),
