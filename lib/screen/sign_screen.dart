@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
 import './find_user.dart';
+import './main_screen.dart';
 import '../utility/form_validator.dart';
 
 class SignScreen extends StatefulWidget {
@@ -39,7 +41,9 @@ class _ScreenScreenState extends State<SignScreen> {
             body: TabBarView(
               children: [
                 _SignInWidget(
-                  onSignIn: () {},
+                  onSignIn: () {
+                    Get.offAll(const MainScreen());
+                  },
                 ),
                 _SignUpWidget(
                   onSignUp: () {
