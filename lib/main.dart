@@ -1,12 +1,19 @@
+// Flutter packages
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// Firebase packages
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:safe_movement_app/firebase_options.dart';
 
+// Google Maps packages
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
+
+// Screens
 import 'screen/intro_screen.dart';
 
 void main() async {
@@ -31,6 +38,13 @@ void main() async {
     } catch (error) {
       print(error);
     }
+  }
+
+  // Google Maps Flutter
+  // NOTE: https://pub.dev/packages/google_maps_flutter_android#display-mode
+  final GoogleMapsFlutterPlatform mapsImplementation = GoogleMapsFlutterPlatform.instance;
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = true;
   }
 
   // Run App
