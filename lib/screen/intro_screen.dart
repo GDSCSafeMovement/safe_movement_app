@@ -23,26 +23,20 @@ class IntroScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed: () => {
                   Get.to(SignScreen(initialIndex: 0))
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
                 child: const Text('Sign In'),
               ),
             ),
             Container(
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-              child: ElevatedButton(
+              child: FilledButton.tonal(
                 onPressed: () => {
                   Get.to(SignScreen(initialIndex: 1))
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green.shade800,
-                ),
                 child: const Text('Sign Up'),
               ),
             ),

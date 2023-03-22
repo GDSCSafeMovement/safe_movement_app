@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
 import './find_user.dart';
+import './main_screen.dart';
 import '../utility/form_validator.dart';
 
 class SignScreen extends StatefulWidget {
@@ -39,7 +41,9 @@ class _ScreenScreenState extends State<SignScreen> {
             body: TabBarView(
               children: [
                 _SignInWidget(
-                  onSignIn: () {},
+                  onSignIn: () {
+                    Get.offAll(const MainScreen());
+                  },
                 ),
                 _SignUpWidget(
                   onSignUp: () {
@@ -134,7 +138,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
             Container(
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed: () async {
                   // Field Validation
                   if (_formKey.currentState!.validate()) {
@@ -170,10 +174,10 @@ class _SignInWidgetState extends State<_SignInWidget> {
               onTap: () {
                 Get.to(const FindUserScreen());
               },
-              child: const Text(
+              child: Text(
                 '도움이 필요하신가요?',
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),
@@ -313,7 +317,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
               const SizedBox(height: 50),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: FilledButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
