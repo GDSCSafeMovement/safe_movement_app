@@ -15,8 +15,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget _currentWidget = const Text("Main Screen");
 
   void setWidget(String title, Widget widget) {
-    _currentTitle = title;
-    _currentWidget = widget;
+    setState(() {
+      _currentTitle = title;
+      _currentWidget = widget;
+    });
   }
 
   @override
