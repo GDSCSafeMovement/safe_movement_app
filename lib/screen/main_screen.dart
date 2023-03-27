@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './home_screen.dart';
 import './movement_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
 
-    setWidget("Safe Movement", const MovementScreen());
+    setWidget("Home", const HomeScreen());
   }
 
   @override
@@ -48,6 +49,14 @@ class _MainScreenState extends State<MainScreen> {
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: const Text("Home"),
+                onTap: () {
+                  setWidget("Home", const HomeScreen());
+                  Get.back();
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.map),
