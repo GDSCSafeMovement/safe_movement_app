@@ -12,6 +12,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.warning),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
