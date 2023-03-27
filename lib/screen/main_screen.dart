@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import './home_screen.dart';
 import './movement_screen.dart';
+import './drone_request_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
 
-    setWidget("Home", const HomeScreen());
+    setWidget("Home", HomeScreen(setWidget: setWidget));
   }
 
   @override
@@ -54,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
                 leading: const Icon(Icons.home),
                 title: const Text("Home"),
                 onTap: () {
-                  setWidget("Home", const HomeScreen());
+                  setWidget("Home", HomeScreen(setWidget: setWidget));
                   Get.back();
                 },
               ),
@@ -63,6 +64,14 @@ class _MainScreenState extends State<MainScreen> {
                 title: const Text("Safe Movement"),
                 onTap: () {
                   setWidget("Safe Movement", const MovementScreen());
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.send),
+                title: const Text("Drone Requets"),
+                onTap: () {
+                  setWidget("Drone Requests", const DroneRequestScreen());
                   Get.back();
                 },
               ),
