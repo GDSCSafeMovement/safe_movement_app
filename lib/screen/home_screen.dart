@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,6 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             CircularButton(
+              onTap: () {
+                widget.setWidget("Maps", const MovementScreen());
+              },
               child: Container(
                 width: double.infinity,
                 height: 200,
