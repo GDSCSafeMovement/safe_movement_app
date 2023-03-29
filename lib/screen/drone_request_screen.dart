@@ -47,7 +47,12 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
+      body:
+      posts.isEmpty ? 
+      const Center(
+        child: Text("No posts")
+      ) :
+      ListView.builder(
         itemCount: posts.length * 2,
         itemBuilder: (context, index) {
           if (index % 2 == 0) {
