@@ -43,7 +43,7 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const DroneRequestFormScreen());
+          Get.to(const DroneRequestFormScreen())!.then((_) => loadAllPosts());
         },
         child: const Icon(Icons.add),
       ),
