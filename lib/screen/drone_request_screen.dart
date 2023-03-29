@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../model/drone_request_post.dart';
 
@@ -10,16 +12,30 @@ class DroneRequestScreen extends StatefulWidget {
 }
 
 class _DroneRequestScreenState extends State<DroneRequestScreen> {
-  final List<DroneRequestPost> posts = [
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-    DroneRequestPost(title: "test1"),
-  ];
+  List<DroneRequestPost> posts = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadAllPosts();
+  }
+
+  void loadAllPosts() async {
+    try {
+        var patch = await DroneRequestPost.getPosts();
+
+        setState(() {
+          posts = patch;
+        });
+
+    } on FirebaseException catch (_) {
+      Get.defaultDialog(
+        title: "Error",
+        content: const Text("게시물을 조회할 권한이 없습니다!"),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +65,7 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
                       ),
                     ),
                     Text(
-                      "datetime",
+                      posts[index].getCreatedAtToString(),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
