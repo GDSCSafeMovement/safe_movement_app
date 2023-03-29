@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "지도 보기",
+                      "Show Maps",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 100,
                       child: Center(
                         child: Text(
-                          '드론 요청',
+                          'Request Drones',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 100,
                       child: Center(
                         child: Text(
-                          '기록 확인',
+                          'Logging',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 100,
                 child: Center(
                   child: Text(
-                    "안전 관련 정보",
+                    "Safe Movement News",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
