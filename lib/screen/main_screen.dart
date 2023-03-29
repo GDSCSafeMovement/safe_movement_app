@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import './home_screen.dart';
 import './movement_screen.dart';
-import './drone_request_screen.dart';
+import './drone_request/drone_request_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });

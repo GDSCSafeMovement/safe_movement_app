@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/drone_request_post.dart';
+import '../../model/drone_request_post.dart';
 import './drone_request_form_screen.dart';
 
 class DroneRequestScreen extends StatefulWidget {
