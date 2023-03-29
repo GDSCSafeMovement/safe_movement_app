@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/drone_request_post.dart';
+import './drone_request_form_screen.dart';
 
 class DroneRequestScreen extends StatefulWidget {
   const DroneRequestScreen({ super.key });
@@ -41,7 +42,9 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(const DroneRequestFormScreen());
+        },
         child: const Icon(Icons.add),
       ),
       body: ListView.builder(
