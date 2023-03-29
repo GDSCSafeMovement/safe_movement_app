@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import './find_user.dart';
 import './main_screen.dart';
 import '../utility/form_validator.dart';
+import '../utility/user.dart';
 
 class SignScreen extends StatefulWidget {
   const SignScreen({
@@ -213,21 +213,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
     }
 
     // Create new user with firebase authentication
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _userEmail,
-      password: _userPassword,
-    );
-
-    // Update user information on firestore
-    FirebaseFirestore
-      .instance
-      .collection("users")
-      .doc(_userEmail)
-      .set(<String, String>{
-        "username": _userName,
-        "phone": _userPhoneNumber,
-      })
-      .onError((error, _) {});
+    signUp(_userEmail, _userPassword, _userName, _userPhoneNumber);
 
     // Success
     return true;
