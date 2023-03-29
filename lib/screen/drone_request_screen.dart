@@ -32,7 +32,7 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
     } on FirebaseException catch (_) {
       Get.defaultDialog(
         title: "Error",
-        content: const Text("게시물을 조회할 권한이 없습니다!"),
+        content: const Text("You do not have permission to view posts!"),
       );
     }
   }
