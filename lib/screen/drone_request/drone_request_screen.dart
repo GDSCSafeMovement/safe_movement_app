@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../model/drone_request_post.dart';
 import './drone_request_form_screen.dart';
+import './drone_request_view_screen.dart';
 
 class DroneRequestScreen extends StatefulWidget {
   const DroneRequestScreen({ super.key });
@@ -43,7 +44,9 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const DroneRequestFormScreen())!.then((_) => loadAllPosts());
+          Get
+            .to(const DroneRequestFormScreen())!
+            .then((_) => loadAllPosts());
         },
         child: const Icon(Icons.add),
       ),
@@ -59,7 +62,11 @@ class _DroneRequestScreenState extends State<DroneRequestScreen> {
             index = (index / 2).round();
 
             return InkWell(
-              onTap: () {},
+              onTap: () {
+                Get
+                  .to(DroneRequestViewScreen(post: posts[index]))!
+                  .then((_) => loadAllPosts());
+              },
               child: Container(
                 margin: const EdgeInsets.all(10),
                 child: Column(
