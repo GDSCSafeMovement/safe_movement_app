@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './drone_request/drone_request_screen.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({ super.key });
+  const HomeScreen({
+    super.key,
+    required this.setWidget
+  });
+
+  final void Function(String title, Widget widget) setWidget;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -50,6 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: CircularButton(
+                    onTap: () {
+                      widget.setWidget("Drone Requests", const DroneRequestScreen());
+                    },
                     child: SizedBox(
                       height: 100,
                       child: Center(

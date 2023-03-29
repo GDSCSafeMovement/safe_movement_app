@@ -16,6 +16,12 @@ import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platf
 // Screens
 import 'screen/intro_screen.dart';
 
+// DroneRequestPost
+import './model/drone_request_post.dart';
+
+// User
+import './utility/user.dart';
+
 void main() async {
   // Firebase Setup
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +38,11 @@ void main() async {
       FirebaseFirestore.instance.useFirestoreEmulator('127.0.0.1', 8080);
       await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
 
+      // Delete all drone request posts
+      DroneRequestPost.deleteAll();
+
       // Make a test user
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: "test@test.com", password: "12345678");
+      await signUp("test@test.com", "12345678", "test", "000-0000-0000");
 
     } catch (error) {
       print(error);
