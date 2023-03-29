@@ -34,7 +34,7 @@ class DroneRequestPost {
         post.createdAt = docSnapshot.get("created_at");
 
         posts.add(post);
-      } on StateError catch (error) {
+      } on StateError catch (_) {
         // pass
       }
     }
