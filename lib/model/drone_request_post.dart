@@ -41,4 +41,18 @@ class DroneRequestPost {
 
     return posts;
   }
+
+  static Future<List<DroneRequestPost>> deleteAll() async {
+    CollectionReference collection = FirebaseFirestore.instance.collection('DroneRequestPosts');
+    QuerySnapshot querySnapshot = await collection.get();
+
+    List<DroneRequestPost> posts = [];
+
+    for (var docSnapshot in querySnapshot.docs) {
+      collection.doc(docSnapshot.id).delete();
+      print("DroneRequetPost.deleteAll: remove doc ${docSnapshot.id}");
+    }
+
+    return posts;
+  }
 }

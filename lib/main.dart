@@ -16,6 +16,9 @@ import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platf
 // Screens
 import 'screen/intro_screen.dart';
 
+// DroneRequestPost
+import './model/drone_request_post.dart';
+
 void main() async {
   // Firebase Setup
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +41,9 @@ void main() async {
     } catch (error) {
       print(error);
     }
+
+    // Delete all drone request posts
+    DroneRequestPost.deleteAll();
   }
 
   // Google Maps Flutter
