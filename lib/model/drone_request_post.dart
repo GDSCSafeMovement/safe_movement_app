@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DroneRequestPost {
   DroneRequestPost({
@@ -41,7 +42,9 @@ class DroneRequestPost {
 
   static Future<List<DroneRequestPost>> getPosts() async {
     CollectionReference collection = FirebaseFirestore.instance.collection('DroneRequestPosts');
-    QuerySnapshot querySnapshot = await collection.get();
+    QuerySnapshot querySnapshot = await collection
+      .where('user', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .get();
 
     List<DroneRequestPost> posts = [];
 
