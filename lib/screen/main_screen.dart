@@ -7,6 +7,8 @@ import './drone_request/drone_request_screen.dart';
 import './emergency_screen.dart';
 import 'family/family_screen.dart';
 import 'safe_movement_news/safe_movement_news_screen.dart';
+import './user_information_screen.dart';
+import './settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });
@@ -106,12 +108,18 @@ class _MainScreenState extends State<MainScreen> {
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text("User Information"),
-                onTap: () {},
+                onTap: () {
+                  setWidget("User Information", const UserInformationScreen());
+                  Get.back();
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.settings),
                 title: const Text("Settings"),
-                onTap: () {},
+                onTap: () {
+                  setWidget("Settings", const SettingsScreen());
+                  Get.back();
+                },
               ),
             ],
           ),
