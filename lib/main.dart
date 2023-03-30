@@ -70,6 +70,7 @@ class SafeMovementApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
