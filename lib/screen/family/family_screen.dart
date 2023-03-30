@@ -57,7 +57,11 @@ class _FamilyScreenState extends State<FamilyScreen> {
       ),
       body: Container(
         margin: const EdgeInsets.all(10),
-        child: ListView.builder(
+        child: _family.isEmpty ? 
+        const Center(
+          child: Text("No data"),
+        ) : 
+        ListView.builder(
           itemCount: _family.length * 2,
           itemBuilder: (context, index) {
             var colorScheme = Theme.of(context).colorScheme;
