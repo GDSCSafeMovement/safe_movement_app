@@ -1,5 +1,5 @@
 String? validateNotBlank(String? value) {
-  return value == null || value.isEmpty ? "내용을 입력해 주세요!" : null;
+  return value == null || value.isEmpty ? "Please enter your details!" : null;
 }
 
 String? validatePassword(String? value) {
@@ -8,7 +8,7 @@ String? validatePassword(String? value) {
   if (notBlank != null) {
     return notBlank;
   } else if (value!.length < 6) {
-    return "패스워드 길이가 최소 6자 이상 되어야 합니다!";
+    return "Password length must be at least 6 characters!";
   } else {
     return null;
   }
@@ -25,7 +25,7 @@ String? validateEmail(String? value) {
   final matches = regex.allMatches(value!);
 
   if (matches.length != 1) {
-    return "이메일을 정확하게 입력해 주세요!";
+    return "Please enter your email correctly!";
   } else {
     return null;
   }
@@ -42,7 +42,7 @@ String? validatePhoneNumber(String? value) {
   final matches = regex.allMatches(value!);
 
   if (matches.length != 1) {
-    return "전화번호를 정확하게 입력해 주세요!";
+    return "Please enter your phone number correctly!";
   } else {
     return null;
   }

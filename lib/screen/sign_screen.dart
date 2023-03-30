@@ -175,7 +175,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
                 Get.to(const FindUserScreen());
               },
               child: Text(
-                '도움이 필요하신가요?',
+                'Need help?',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
