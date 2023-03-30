@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import './home_screen.dart';
 import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
+import './emergency_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });
@@ -61,9 +62,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.map),
-                title: const Text("Safe Movement"),
+                title: const Text("Maps"),
                 onTap: () {
-                  setWidget("Safe Movement", const MovementScreen());
+                  setWidget("Maps", const MovementScreen());
                   Get.back();
                 },
               ),
@@ -78,7 +79,10 @@ class _MainScreenState extends State<MainScreen> {
               ListTile(
                 leading: const Icon(Icons.warning),
                 title: const Text("Emergency"),
-                onTap: () {},
+                onTap: () {
+                  setWidget("Emergency", const EmergencyScreen());
+                  Get.back();
+                },
               ),
               const Divider(),
               ListTile(
