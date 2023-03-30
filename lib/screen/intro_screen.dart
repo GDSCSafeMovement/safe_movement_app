@@ -16,7 +16,7 @@ class IntroScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text('Safe Movement', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                  Text('Next life and movement', style: TextStyle(fontSize: 14)),
+                  Text('Supporting safe movement for kids', style: TextStyle(fontSize: 14)),
                 ],
               ),
             ),
