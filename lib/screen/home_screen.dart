@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
 import './emergency_screen.dart';
+import 'family/family_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -100,11 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Expanded(
                   child: CircularButton(
+                    onTap: () {
+                      widget.setWidget("Family", const FamilyScreen());
+                    },
                     child: SizedBox(
                       height: 100,
                       child: Center(
                         child: Text(
-                          'Logging',
+                          'Family',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

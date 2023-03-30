@@ -44,7 +44,32 @@ Future<Map<String, dynamic>> getUserInfoWithUID(String uid) async {
   };
 }
 
-void deleteAllUserData() async {
+Future<Map<String, dynamic>?> findUserByUsername(String query) async {
+  CollectionReference collection = FirebaseFirestore.instance.collection("users");
+
+  var querySnapshot = await collection.where('username', isEqualTo: query).get();
+
+  for (var docSnapshot in querySnapshot.docs) {
+    return await getUserInfoWithUID(docSnapshot.id);
+  }
+
+  return null;
+}
+
+Future<void> addFamily(String uid) async {
+  var user = FirebaseAuth.instance.currentUser!;
+
+  var data = await getUserInfoWithUID(user.uid);
+
+  var familyData = data["family"];
+  familyData ??= {};
+  familyData[uid] = false;
+
+  CollectionReference collection = FirebaseFirestore.instance.collection("users");
+  collection.doc(user.uid).update({ "family": familyData });
+}
+
+Future<void> deleteAllUserData() async {
   CollectionReference collection = FirebaseFirestore.instance.collection("users");
   var querySnapshot = await collection.get();
 
