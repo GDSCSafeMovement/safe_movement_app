@@ -159,7 +159,7 @@ class _SignInWidgetState extends State<_SignInWidget> {
                         content: Container(
                           margin: const EdgeInsets.all(10),
                           child: const Text(
-                            "Username 혹은 Password가\n잘못되었습니다!",
+                            "Wrong Username or Password!",
                             textAlign: TextAlign.center,
                           ),
                         )
