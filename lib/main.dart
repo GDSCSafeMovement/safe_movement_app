@@ -13,13 +13,12 @@ import 'package:safe_movement_app/firebase_options.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 
-// Screens
+// Flutter Lorem (Sample Texts)
+import 'package:flutter_lorem/flutter_lorem.dart';
+
 import 'screen/intro_screen.dart';
-
-// DroneRequestPost
 import './model/drone_request_post.dart';
-
-// User
+import './model/safe_movement_news.dart';
 import './utility/user.dart';
 
 void main() async {
@@ -39,7 +38,15 @@ void main() async {
       await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
 
       // Delete all drone request posts
-      DroneRequestPost.deleteAll();
+      await DroneRequestPost.deleteAll();
+
+      // Delete all save movement news
+      await SafeMovementNews.deleteAll();
+
+      // Add example save movement news
+      await SafeMovementNews(title: "Test News 1", content: lorem(words: 500)).add();
+      await SafeMovementNews(title: "Test News 2", content: lorem(words: 800)).add();
+      await SafeMovementNews(title: "Test News 3", content: lorem(words: 1000)).add();
 
       // Make a test user
       await signUp("test@test.com", "12345678", "test", "000-0000-0000", "111-1111-1111");
