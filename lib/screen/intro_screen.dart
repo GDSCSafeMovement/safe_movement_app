@@ -25,7 +25,7 @@ class IntroScreen extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: FilledButton(
                 onPressed: () => {
-                  Get.to(SignScreen(initialIndex: 0))
+                  Get.to(const SignScreen(initialIndex: 0))
                 },
                 child: const Text('Sign In'),
               ),
@@ -35,7 +35,7 @@ class IntroScreen extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: FilledButton.tonal(
                 onPressed: () => {
-                  Get.to(SignScreen(initialIndex: 1))
+                  Get.to(const SignScreen(initialIndex: 1))
                 },
                 child: const Text('Sign Up'),
               ),
