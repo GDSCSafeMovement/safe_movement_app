@@ -204,6 +204,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
   String _userPasswordCheck = "";
   String _userName = "";
   String _userPhoneNumber = "";
+  String _userEmergencyPhoneNumber = "";
 
   Future<bool> firebaseSignUp() async {
     // Check password check field
@@ -213,7 +214,7 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
     }
 
     // Create new user with firebase authentication
-    signUp(_userEmail, _userPassword, _userName, _userPhoneNumber);
+    signUp(_userEmail, _userPassword, _userName, _userPhoneNumber, _userEmergencyPhoneNumber);
 
     // Success
     return true;
@@ -299,6 +300,15 @@ class _SignUpWidgetState extends State<_SignUpWidget> {
                 ),
                 validator: validatePhoneNumber,
                 onSaved: (value) => { _userPhoneNumber = value! },
+              ),
+              TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(
+                  labelText: "Emergency Phone Number",
+                  suffixIcon: Icon(Icons.phone),
+                ),
+                validator: validatePhoneNumber,
+                onSaved: (value) => { _userEmergencyPhoneNumber = value! },
               ),
               const SizedBox(height: 50),
               SizedBox(

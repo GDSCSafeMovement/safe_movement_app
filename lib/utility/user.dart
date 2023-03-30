@@ -1,7 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<User?> signUp(String email, String password, String username, String phone) async {
+Future<User?> signUp(
+  String email,
+  String password,
+  String username,
+  String phone,
+  String emergencyPhone,
+) async {
   // Create new user with firebase authentication
   var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: email,
@@ -13,9 +19,11 @@ Future<User?> signUp(String email, String password, String username, String phon
     .instance
     .collection("users")
     .doc(user.user!.uid)
-    .set(<String, String>{
+    .set(<String, dynamic>{
       "username": username,
       "phone": phone,
+      "emergency_phone": emergencyPhone,
+      "family": null,
     })
     .onError((error, _) {});
 
@@ -28,8 +36,11 @@ Future<Map<String, dynamic>> getUserInfoWithUID(String uid) async {
   var docSnapshot = await collection.doc(uid).get();
 
   return {
+    "uid": uid,
     "username": docSnapshot.get("username"),
     "phone": docSnapshot.get("phone"),
+    "emergency_phone": docSnapshot.get("emergency_phone"),
+    "family": docSnapshot.get("family"),
   };
 }
 
