@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
+import './emergency_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -21,7 +22,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.defaultDialog(
+            title: "Emergency",
+            content: Container(
+              margin: const EdgeInsets.all(10),
+              width: double.infinity,
+              height: 50,
+              child: FilledButton(
+                onPressed: () {
+                  widget.setWidget("Emergency", const EmergencyScreen());
+                  Get.back();
+                },
+                child: const Center(
+                  child: Text("Emergency")
+                ),
+              ),
+            ),
+          );
+        },
         child: const Icon(Icons.warning),
       ),
       body: SingleChildScrollView(
