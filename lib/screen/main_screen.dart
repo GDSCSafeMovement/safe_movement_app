@@ -5,6 +5,7 @@ import './home_screen.dart';
 import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
 import './emergency_screen.dart';
+import 'family/family_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });
@@ -73,6 +74,14 @@ class _MainScreenState extends State<MainScreen> {
                 title: const Text("Drone Requets"),
                 onTap: () {
                   setWidget("Drone Requests", const DroneRequestScreen());
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.family_restroom),
+                title: const Text("Family"),
+                onTap: () {
+                  setWidget("Family", const FamilyScreen());
                   Get.back();
                 },
               ),

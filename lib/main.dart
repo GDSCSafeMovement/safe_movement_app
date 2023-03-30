@@ -42,7 +42,7 @@ void main() async {
       DroneRequestPost.deleteAll();
 
       // Make a test user
-      await signUp("test@test.com", "12345678", "test", "000-0000-0000");
+      await signUp("test@test.com", "12345678", "test", "000-0000-0000", "111-1111-1111");
 
     } catch (error) {
       print(error);
