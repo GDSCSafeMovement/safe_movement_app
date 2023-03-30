@@ -5,6 +5,7 @@ import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
 import './emergency_screen.dart';
 import 'family/family_screen.dart';
+import 'safe_movement_news/safe_movement_news_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -122,6 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             CircularButton(
+              onTap: () {
+                widget.setWidget("Safe Movement News", const SafeMovementNewsScreen());
+              },
               child: SizedBox(
                 width: double.infinity,
                 height: 100,

@@ -6,6 +6,7 @@ import './movement_screen.dart';
 import './drone_request/drone_request_screen.dart';
 import './emergency_screen.dart';
 import 'family/family_screen.dart';
+import 'safe_movement_news/safe_movement_news_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({ super.key });
@@ -82,6 +83,14 @@ class _MainScreenState extends State<MainScreen> {
                 title: const Text("Family"),
                 onTap: () {
                   setWidget("Family", const FamilyScreen());
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.newspaper),
+                title: const Text("Safe Movement News"),
+                onTap: () {
+                  setWidget("Safe Movement News", const SafeMovementNewsScreen());
                   Get.back();
                 },
               ),
